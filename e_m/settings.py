@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 #$ python manage.py runserver
-
+import dj_database_url
 from pathlib import Path
 # from decouple import config
 
@@ -84,16 +84,28 @@ WSGI_APPLICATION = 'e_m.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'task_m',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'task_m',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://even_i2sd_user:k1tw48RkUoA0FQD9O9umy7UrhA32OZiX@dpg-d3clueali9vc73dml9qg-a.oregon-postgres.render.com/even_i2sd',
+        conn_max_age=600
+    )
 }
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
