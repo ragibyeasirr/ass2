@@ -1,0 +1,105 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-4xl text-blue-400 mb-14 text-center mt-14 ">Participant Dashboard</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-7  mr-20 ml-20">
+
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Total perticipents</p>
+    <p class="text-2xl font-bold">{{total_par}}</p>
+    
+</div>
+<a href="{% url 'p-dashboard' %}?date=t">
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Total Events</p>
+    <p class="text-2xl font-bold">{{total_event}}</p>
+    
+</div>
+</a>
+<a href="{% url 'p-dashboard' %}?date=u">
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Upcoming Events</p>
+    <p class="text-2xl font-bold">{{upcoming}}</p>
+    
+</div>
+</a>
+<a href="{% url 'p-dashboard' %}?date=p">
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Past Events</p>
+    <p class="text-2xl font-bold">{{past}}</p>
+    
+</div>
+</a>
+
+
+</div>
+
+
+
+  <div class="mt-10">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="px-2 py-1 w-1/2 text-center flex mx-auto {% if message.tags == 'success' %}bg-green-500
+                        {% elif message.tags == 'error' %} bg-red-500{% endif %} 
+            ">{{message}}</div>
+            
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+
+
+{% comment %} <div >
+
+<div class="mt-10 ml-20 gap-5 flex">
+    <a href=" {% url "event_create" %} " class ="bg-green-500 text-white text-xl px-6 py-3 rounded ">Add event</a>
+<a href=" {% url "category_create" %}" class ="bg-green-500 text-white text-xl px-6 py-3 rounded ">Add category</a>
+<a href=" {% url "participant_create" %}" class ="bg-green-500 text-white text-xl px-6 py-3 rounded ">Add participant</a>
+
+</div>
+<div class="mt-5 ml-20 gap-5 flex">
+    <a href=" {% url "sae" %}" class ="bg-red-500 text-white text-xl px-6 py-3 rounded ">Delete and Update event</a>
+<a href="{% url "sac" %} " class ="bg-red-500 text-white text-xl px-6 py-3 rounded ">Delete and Update category</a>
+<a href=" {% url "sap" %} " class ="bg-red-500 text-white text-xl px-6 py-3 rounded ">Delete and Update participant</a>
+</div>
+
+
+
+</div> {% endcomment %}
+
+<div class=" text-center mt-20 mb-10 items-center" >
+
+    <h1 class="text-4xl text-blue-500 font-semibold ">ALL EVENTS</h1>
+
+
+</div>
+<div class=" divide-y divide-gray-300 mr-20 ml-20 bg-white mb-20">
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+{% for e in today  %}
+<div class="border-gray-400   border-2  w-auto rounded">
+     <p> <img src={{e.image.url}} class="w-full h-auto border-gray-400   border-b-2 ">  </p>
+     <div class="p-3">
+    <p class="">EVENT NAME:{{e.name}}</p>
+    <span class="">DESCRIPTION :{{e.description}}</span>
+    <p> DATE:{{e.date}}</p>
+    
+    <a href="{% url 'rsvp_event' e.id user.id %}" 
+       class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+       RSVP Now
+    </a>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+
+
+</div>
+
+
+        
+{% endblock content %}

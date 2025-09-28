@@ -1,0 +1,79 @@
+{% extends "main.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+  {% block task %}
+<h2 class="text-4xl text-blue-400 mb-14 text-center mt-14 ">Organizer Dashboard</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-7  mr-20 ml-20">
+
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Total perticipents</p>
+    <p class="text-2xl font-bold">{{total_par}}</p>
+    
+</div>
+<a href="{% url 'db' %}?date=t">
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Total Events</p>
+    <p class="text-2xl font-bold">{{total_event}}</p>
+    
+</div>
+</a>
+<a href="{% url 'db' %}?date=u">
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Upcoming Events</p>
+    <p class="text-2xl font-bold">{{upcoming}}</p>
+    
+</div>
+</a>
+<a href="{% url 'db' %}?date=p">
+<div class="bg-white p-5 shadow rounded">
+    <p class="text-xl font-bold">Past Events</p>
+    <p class="text-2xl font-bold">{{past}}</p>
+    
+</div>
+</a>
+
+
+</div>
+<div >
+
+<div class="mt-10 ml-20 gap-5 flex">
+    <a href=" {% url "event_create" %} " class ="bg-green-500 text-white text-xl px-6 py-3 rounded ">Add event</a>
+<a href=" {% url "category_create" %}" class ="bg-green-500 text-white text-xl px-6 py-3 rounded ">Add category</a>
+
+
+</div>
+<div class="mt-5 ml-20 gap-5 flex">
+    <a href=" {% url "sae" %}" class ="bg-red-500 text-white text-xl px-6 py-3 rounded ">Delete and Update event</a>
+<a href="{% url "sac" %} " class ="bg-red-500 text-white text-xl px-6 py-3 rounded ">Delete and Update category</a>
+
+</div>
+
+
+
+</div>
+
+<div class=" text-center mt-20 mb-10 items-center" >
+
+    <h1 class="text-4xl text-blue-500 font-semibold "> EVENTS</h1>
+
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 ml-20 mr-20">
+{% for e in today  %}
+<div class="border-gray-400   border-2  w-auto rounded">
+     <p> <img src={{e.image.url}} class="w-full h-auto border-gray-400   border-b-2 ">  </p>
+     <div class="p-3 ">
+    <p class="">EVENT NAME:{{e.name}}</p>
+    <span class="">DESCRIPTION :{{e.description}}</span>
+    <p class="mb-2"> DATE:{{e.date}}</p>
+    
+    <a href="{% url "detail" e.id %}" class="px-2 py-1 bg-orange-500 rounded mt-3">VIEW DETAIL</a>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+
+
+  {% endblock task %}

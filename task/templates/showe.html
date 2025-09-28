@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+{% block content %}
+        {% if messages %}
+        {%  for message in  messages  %}
+           <div class="px-2 py-5 ml-20 mr-20 {% if message.tags == 'success' %}bg-red-500{% endif %} ">
+            {{message}}
+           </div>
+        {% endfor %}
+    {% endif %}
+
+  <div class=" text-center mt-20 mb-10 items-center" >
+
+    <h1 class="text-4xl text-blue-500 font-semibold ">ALL EVENTS</h1>
+
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mr-20 ml-20">
+{% for e in all  %}
+<div class="border-gray-400   border-2  w-auto rounded">
+     <p> <img src={{e.image.url}} class="w-full h-auto border-gray-400   border-b-2 ">  </p>
+     <div class="p-3">
+    <p class="">EVENT NAME:{{e.name}}</p>
+    <p class="">DESCRIPTION :{{e.description}}</p>
+    <p class="mb-4"> DATE:{{e.date}}</p>
+    
+     <div class="flex gap-2 items-center justify-center" >
+          
+    <a href='{% url "event_update" e.id %}' class="px-2 py-1 bg-green-500">EDIT</a>
+     <a href="{% url "detail" e.id %}" class="px-2 py-1 bg-orange-500 rounded ">VIEW DETAIL</a>
+     <form action=" {% url "event_delate" e.id %}" method='POST'>
+    {% csrf_token %}
+    <button type="submit" class="px-2 py-1 bg-red-500" >DELETE</button>
+   </form>
+   
+    </div>
+  
+    </div>
+</div>
+
+{% endfor %}
+</div>
+     
+</body>
+{% endblock content %}

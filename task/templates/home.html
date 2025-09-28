@@ -1,0 +1,100 @@
+
+
+{% extends "main.html" %}
+{% block title %}Home{% endblock title %}
+   {% block task %}
+   <div class="h-screen">
+    <div class="bg-blue-300 h-screen p-10 ">
+         <div class="text-6xl text-white text-center ">
+      <p class="mt-5" >WELCOME TO HOME PAGE</p>
+             </div>
+
+            
+      <form method="get" class="mt-52 text-center">
+         <label for="">search here</label>
+  <input type="text" name="search" placeholder="Search by name or location"
+   
+
+    class="border p-2 rounded w-1/3" />
+
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+
+
+</form>
+<div class="flex justify-center flex-col">  
+<form method="get" class="mt-20 text-center">
+   <div class="flex  mb-2 md:mb-0">
+    <label for="">start date</label>
+  <input type="date" name="date" placeholder="Search by name or location"
+    class="border p-2 rounded w-40 m-2" />
+   </div>
+   <div class="flex">
+    <label for="">end date</label>
+    <input type="date" name="dat" placeholder="Search by name or location"
+    class="border p-2 rounded w-40 m-2" />
+   </div>
+   <div class="flex">
+    <label for="">category</label>
+    <select name="cat" class="border p-2 rounded w-32 m-2" > 
+       {% for c in cate %}
+       <option value="{{c.id}}">
+       {{c.name}}
+       </option>
+       {% endfor %}
+</select>
+
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">filter</button>
+</div>
+</form>
+</div>
+  
+   </div>
+    
+   </div>
+  <div class=" text-center mt-20 mb-10 items-center" >
+
+    <h1 class="text-4xl text-blue-500 font-semibold ">ALL EVENTS</h1>
+
+
+</div>
+{% comment %} 
+<div class=" divide-y divide-gray-300 mr-20 ml-20 bg-white mb-20">
+{% for e in all  %}
+<div class="grid grid-cols-6 h-20 gap-10 items-center text-center">
+    <div class="flex gap-2 items-center justify-center">
+        <p class="text-center">{{e.name}}</p>
+    <a href="{% url "detail" e.id %}" class="px-2 py-1 bg-orange-500">VIEW DETAIL</a>
+    </div>
+    <span class="text-center">{{e.description}}</span>
+    <p>{{e.date}}</p>
+    <p>{{e.time}}</p>
+    <p>{{e.location}}</p>
+    <p>{{e.category}}</p>
+</div>
+ {% empty %}
+        <p class="text-2xl text-center bg-red-500 p-4">No found yet</p>
+{% endfor %}
+
+
+</div> {% endcomment %}
+   
+   
+   <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+{% for e in all  %}
+<div class="border-gray-400   border-2  w-auto rounded">
+     <p> <img src={{e.image.url}} class="w-full h-auto border-gray-400   border-b-2 ">  </p>
+     <div class="p-3 ">
+    <p class="">EVENT NAME:{{e.name}}</p>
+    <span class="">DESCRIPTION :{{e.description}}</span>
+    <p class="mb-2"> DATE:{{e.date}}</p>
+    
+    <a href="{% url "detail" e.id %}" class="px-2 py-1 bg-orange-500 rounded mt-3">VIEW DETAIL</a>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+
+   
+   
+   {% endblock task %}
