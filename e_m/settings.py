@@ -83,25 +83,25 @@ WSGI_APPLICATION = 'e_m.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('dNAME'),
-        'USER':config('dUSER'),
-        'PASSWORD':config('dPASSWORD'),
-        'HOST':config('dHOST'),
-        'PORT':config('dPORT')
-    }
-}
-
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
-#         default='postgresql://even_i2sd_user:k1tw48RkUoA0FQD9O9umy7UrhA32OZiX@dpg-d3clueali9vc73dml9qg-a.oregon-postgres.render.com/even_i2sd',
-#         conn_max_age=600
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('dNAME'),
+#         'USER':config('dUSER'),
+#         'PASSWORD':config('dPASSWORD'),
+#         'HOST':config('dHOST'),
+#         'PORT':config('dPORT')
+#     }
 # }
+
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://even_i2sd_user:k1tw48RkUoA0FQD9O9umy7UrhA32OZiX@dpg-d3clueali9vc73dml9qg-a.oregon-postgres.render.com/even_i2sd',
+        conn_max_age=600
+    )
+}
 
 
 
